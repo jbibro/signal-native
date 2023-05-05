@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import Combine
 
 @main
 struct signal_nativeApp: App {
+    
+    @StateObject private var modelData = ModelData()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(modelData)
         }
     }
 }

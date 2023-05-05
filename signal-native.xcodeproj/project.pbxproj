@@ -7,19 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E347E6FE2A0393EB00AFE5EB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E347E6FD2A0393EB00AFE5EB /* OrderedCollections */; };
+		E347E7002A03B18600AFE5EB /* ideas in Resources */ = {isa = PBXBuildFile; fileRef = E347E6FF2A03B18600AFE5EB /* ideas */; };
+		E38653812A02A433008978DB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653802A02A433008978DB /* Contact.swift */; };
+		E38653832A02A72C008978DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653822A02A72C008978DB /* Message.swift */; };
+		E38653852A02AC81008978DB /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653842A02AC81008978DB /* ModelData.swift */; };
+		E38653872A02C291008978DB /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653862A02C291008978DB /* Signal.swift */; };
+		E389AB5F2A03EDFE008CD84B /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */; };
+		E389AB622A03FF8C008CD84B /* SignalClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E389AB612A03FF8C008CD84B /* SignalClient.swift */; };
+		E389AB652A04004F008CD84B /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB642A04004F008CD84B /* NIO */; };
+		E389AB672A04004F008CD84B /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB662A04004F008CD84B /* NIOFoundationCompat */; };
+		E389AB6A2A040B32008CD84B /* NIOExtras in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB692A040B32008CD84B /* NIOExtras */; };
+		E389AB6C2A041A04008CD84B /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = E389AB6B2A041A04008CD84B /* test.json */; };
 		E3F2C3A229F983100087B12B /* signal_nativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3A129F983100087B12B /* signal_nativeApp.swift */; };
 		E3F2C3A429F983100087B12B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3A329F983100087B12B /* ContentView.swift */; };
 		E3F2C3A629F983110087B12B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F2C3A529F983110087B12B /* Assets.xcassets */; };
 		E3F2C3A929F983110087B12B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F2C3A829F983110087B12B /* Preview Assets.xcassets */; };
+		E3F2C3B529F98B370087B12B /* ContactRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B429F98B370087B12B /* ContactRow.swift */; };
+		E3F2C3B729F98C540087B12B /* ContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B629F98C540087B12B /* ContactList.swift */; };
+		E3F2C3B929F9907E0087B12B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B829F9907E0087B12B /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E347E6FF2A03B18600AFE5EB /* ideas */ = {isa = PBXFileReference; lastKnownFileType = text; path = ideas; sourceTree = "<group>"; };
+		E38653802A02A433008978DB /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		E38653822A02A72C008978DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E38653842A02AC81008978DB /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		E38653862A02C291008978DB /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		E389AB612A03FF8C008CD84B /* SignalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalClient.swift; sourceTree = "<group>"; };
+		E389AB6B2A041A04008CD84B /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		E3F2C39E29F983100087B12B /* signal-native.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "signal-native.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F2C3A129F983100087B12B /* signal_nativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signal_nativeApp.swift; sourceTree = "<group>"; };
 		E3F2C3A329F983100087B12B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E3F2C3A529F983110087B12B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3F2C3A829F983110087B12B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E3F2C3AA29F983110087B12B /* signal_native.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = signal_native.entitlements; sourceTree = "<group>"; };
+		E3F2C3B429F98B370087B12B /* ContactRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRow.swift; sourceTree = "<group>"; };
+		E3F2C3B629F98C540087B12B /* ContactList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactList.swift; sourceTree = "<group>"; };
+		E3F2C3B829F9907E0087B12B /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,15 +53,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E347E6FE2A0393EB00AFE5EB /* OrderedCollections in Frameworks */,
+				E389AB672A04004F008CD84B /* NIOFoundationCompat in Frameworks */,
+				E389AB6A2A040B32008CD84B /* NIOExtras in Frameworks */,
+				E389AB652A04004F008CD84B /* NIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E389AB602A03FF79008CD84B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E389AB612A03FF8C008CD84B /* SignalClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		E3F2C39529F983100087B12B = {
 			isa = PBXGroup;
 			children = (
+				E389AB6B2A041A04008CD84B /* test.json */,
 				E3F2C3A029F983100087B12B /* signal-native */,
 				E3F2C39F29F983100087B12B /* Products */,
 			);
@@ -52,11 +91,15 @@
 		E3F2C3A029F983100087B12B /* signal-native */ = {
 			isa = PBXGroup;
 			children = (
+				E389AB602A03FF79008CD84B /* Network */,
+				E3F2C3BA29F99A000087B12B /* Model */,
+				E3F2C3B329F98AFD0087B12B /* Views */,
 				E3F2C3A129F983100087B12B /* signal_nativeApp.swift */,
 				E3F2C3A329F983100087B12B /* ContentView.swift */,
 				E3F2C3A529F983110087B12B /* Assets.xcassets */,
 				E3F2C3AA29F983110087B12B /* signal_native.entitlements */,
 				E3F2C3A729F983110087B12B /* Preview Content */,
+				E347E6FF2A03B18600AFE5EB /* ideas */,
 			);
 			path = "signal-native";
 			sourceTree = "<group>";
@@ -67,6 +110,28 @@
 				E3F2C3A829F983110087B12B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E3F2C3B329F98AFD0087B12B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3F2C3B429F98B370087B12B /* ContactRow.swift */,
+				E3F2C3B629F98C540087B12B /* ContactList.swift */,
+				E3F2C3B829F9907E0087B12B /* MessageView.swift */,
+				E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E3F2C3BA29F99A000087B12B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E38653802A02A433008978DB /* Contact.swift */,
+				E38653822A02A72C008978DB /* Message.swift */,
+				E38653842A02AC81008978DB /* ModelData.swift */,
+				E38653862A02C291008978DB /* Signal.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +150,12 @@
 			dependencies = (
 			);
 			name = "signal-native";
+			packageProductDependencies = (
+				E347E6FD2A0393EB00AFE5EB /* OrderedCollections */,
+				E389AB642A04004F008CD84B /* NIO */,
+				E389AB662A04004F008CD84B /* NIOFoundationCompat */,
+				E389AB692A040B32008CD84B /* NIOExtras */,
+			);
 			productName = "signal-native";
 			productReference = E3F2C39E29F983100087B12B /* signal-native.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +184,11 @@
 				Base,
 			);
 			mainGroup = E3F2C39529F983100087B12B;
+			packageReferences = (
+				E347E6FC2A0393EB00AFE5EB /* XCRemoteSwiftPackageReference "swift-collections" */,
+				E389AB632A04004F008CD84B /* XCRemoteSwiftPackageReference "swift-nio" */,
+				E389AB682A040B32008CD84B /* XCRemoteSwiftPackageReference "swift-nio-extras" */,
+			);
 			productRefGroup = E3F2C39F29F983100087B12B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +203,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E347E7002A03B18600AFE5EB /* ideas in Resources */,
+				E389AB6C2A041A04008CD84B /* test.json in Resources */,
 				E3F2C3A929F983110087B12B /* Preview Assets.xcassets in Resources */,
 				E3F2C3A629F983110087B12B /* Assets.xcassets in Resources */,
 			);
@@ -139,8 +217,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E38653812A02A433008978DB /* Contact.swift in Sources */,
+				E389AB622A03FF8C008CD84B /* SignalClient.swift in Sources */,
+				E3F2C3B729F98C540087B12B /* ContactList.swift in Sources */,
 				E3F2C3A429F983100087B12B /* ContentView.swift in Sources */,
 				E3F2C3A229F983100087B12B /* signal_nativeApp.swift in Sources */,
+				E389AB5F2A03EDFE008CD84B /* ChatBubbleView.swift in Sources */,
+				E38653872A02C291008978DB /* Signal.swift in Sources */,
+				E3F2C3B529F98B370087B12B /* ContactRow.swift in Sources */,
+				E38653852A02AC81008978DB /* ModelData.swift in Sources */,
+				E3F2C3B929F9907E0087B12B /* MessageView.swift in Sources */,
+				E38653832A02A72C008978DB /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +419,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E347E6FC2A0393EB00AFE5EB /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		E389AB632A04004F008CD84B /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		E389AB682A040B32008CD84B /* XCRemoteSwiftPackageReference "swift-nio-extras" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio-extras.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E347E6FD2A0393EB00AFE5EB /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E347E6FC2A0393EB00AFE5EB /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		E389AB642A04004F008CD84B /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E389AB632A04004F008CD84B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		E389AB662A04004F008CD84B /* NIOFoundationCompat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E389AB632A04004F008CD84B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOFoundationCompat;
+		};
+		E389AB692A040B32008CD84B /* NIOExtras */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E389AB682A040B32008CD84B /* XCRemoteSwiftPackageReference "swift-nio-extras" */;
+			productName = NIOExtras;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E3F2C39629F983100087B12B /* Project object */;
 }

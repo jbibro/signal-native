@@ -1,0 +1,2 @@
+
+{"jsonrpc":"2.0","method":"receive","params":{"envelope":{"source":"+48514371953","sourceNumber":"+48514371953","sourceUuid":"f95012c0-19fa-4727-b6d8-96cafc1cc86b","sourceName":"Jakub","sourceDevice":1,"timestamp":1683218946319,"syncMessage":{"sentMessage":{"destination":"+48514371953","destinationNumber":"+48514371953","destinationUuid":"f95012c0-19fa-4727-b6d8-96cafc1cc86b","timestamp":1683218946319,"message":"Tr","expiresInSeconds":0,"viewOnce":false}}}
