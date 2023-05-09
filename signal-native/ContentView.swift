@@ -12,7 +12,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ContactList()
-//            MessageView()
         }
         .navigationTitle("Signal Native")
     }

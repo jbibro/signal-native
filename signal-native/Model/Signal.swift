@@ -13,7 +13,7 @@ struct Signal {
     var realMessages = PassthroughSubject<(who: String, what: Message), Never>()
     
     init() {
-        SignalClient(messages: realMessages).connect()
+//        SignalClient(messages: realMessages).connect()
     }
     
     func messages() -> AnyPublisher<(who: String, what: Message), Never> {
@@ -21,10 +21,22 @@ struct Signal {
             [
                 ("Ania", Message(body: "co tam", direction: Direction.incoming)),
                 ("Ania", Message(body: "a nic", direction: Direction.outgoing)),
-                ("Miko", Message(body: "nudy", direction: Direction.incoming))
+                ("Kuba", Message(body: "nudy", direction: Direction.incoming)),
+                ("Kuba", Message(body: "nudy1", direction: Direction.outgoing)),
+                ("Kuba", Message(body: "nudy2", direction: Direction.incoming)),
+                ("Kuba", Message(body: "nudy3", direction: Direction.outgoing)),
+                ("Kuba", Message(body: "nudy4", direction: Direction.incoming)),
+                ("Ania", Message(body: "co tam", direction: Direction.incoming)),
+                ("Ania", Message(body: "a nic", direction: Direction.outgoing)),
+                ("Kuba", Message(body: "nudy", direction: Direction.incoming)),
+                ("Kuba", Message(body: "nudy1", direction: Direction.outgoing)),
+                ("Kuba", Message(body: "nudy2", direction: Direction.incoming)),
+                ("Kuba", Message(body: "nudy3", direction: Direction.outgoing)),
+                ("Kuba", Message(body: "nudy4", direction: Direction.incoming)),
             ]
         )
-        .zip(Timer.publish(every: 0.5, on: RunLoop.main, in: .default).autoconnect())
+//        .merge(with: realMessages)
+        .zip(Timer.publish(every: 0.2, on: RunLoop.main, in: .default).autoconnect())
         .map { it in it.0 }
         .eraseToAnyPublisher()
     }

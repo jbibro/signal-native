@@ -45,8 +45,11 @@ class Handler: ChannelInboundHandler {
         print(String(buffer: buffer))
         do {
             let signalMessage = try jsonDecoder.decode(SignalMessage.self, from: data!)
-            print(signalMessage)
-            messages.send((who: signalMessage.params.envelope.sourceName, what: Message(body: signalMessage.params.envelope.syncMessage.sentMessage.message, direction: Direction.incoming)))
+            if let sent = signalMessage.params.envelope.syncMessage {
+                messages.send((who: signalMessage.params.envelope.sourceName, what: Message(body: sent.sentMessage.message, direction: Direction.outgoing)))
+            } else if let received = signalMessage.params.envelope.dataMessage {
+                messages.send((who: signalMessage.params.envelope.sourceName, what: Message(body: received.message, direction: Direction.incoming)))
+            }
         } catch {
             
         }
@@ -63,13 +66,19 @@ struct Params: Decodable {
 
 struct Envelope: Decodable {
     var sourceName: String
-    var syncMessage: SyncMessage
+    var syncMessage: SyncMessage?
+    var dataMessage: DataMessage?
 }
 
 struct SyncMessage: Decodable {
     var sentMessage: SentMessage
 }
 
+struct DataMessage: Decodable {
+    var message: String
+}
+
 struct SentMessage: Decodable {
     var message: String
+    var destination: String
 }

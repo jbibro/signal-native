@@ -9,29 +9,26 @@ import Foundation
 import OrderedCollections
 import Combine
 
-final class ModelData: ObservableObject {
-    @Published var contacts: OrderedDictionary<Contact, Message> = [:]
+final class Messages: ObservableObject {
     @Published var messages: OrderedDictionary<Contact, [Message]> = [
-        Contact(name: "Ania"): [],
+        Contact(name: "Aniusia 😍"): [],
         Contact(name: "Miko"): [],
-        Contact(name: "Jakub"): [],
+        Contact(name: "Kuba"): [],
+        Contact(name: "Jakub"): []
     ]
     
-    private let signal = Signal()
+    private var signal: Signal
     var messageStream: AnyCancellable?
     
-    init() {
-        messageStream = signal.realMessages
-            .merge(with: signal.messages())
+    init(signal: Signal) {
+        self.signal = signal
+        messageStream = signal.messages()
             .receive(on: RunLoop.main)
-            .sink { it in
-                self.onMessage(msg: it)
-            }
+            .sink { self.onMessage(msg: $0) }
     }
     
     func onMessage(msg: (who: String, what: Message)) {
         let contact = Contact(name: msg.who)
-        contacts[contact] = msg.what
         messages[contact]?.append(msg.what)
     }
 }
