@@ -10,10 +10,6 @@ import SwiftUI
 struct ChatBubbleView: View {
     let message: Message
     
-    let outgoingBubbleColor = NSColor.systemBlue
-    let incomingBubbleColor = NSColor.windowBackgroundColor
-    let incomingLabelColor = NSColor.labelColor
-    
     var body: some View {
         HStack {
             if message.direction == Direction.outgoing {
@@ -21,11 +17,11 @@ struct ChatBubbleView: View {
             }
             
             Text(message.body)
-                .foregroundColor(Color(message.direction == Direction.outgoing ? .white : incomingLabelColor))
+                .foregroundColor(Color(message.direction == Direction.outgoing ? .white : .labelColor))
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
-                .background(Color(message.direction == Direction.outgoing ? outgoingBubbleColor : incomingBubbleColor))
+                .background(Color(message.direction == Direction.outgoing ? .systemBlue : .windowBackgroundColor))
                 .cornerRadius(10)
             
             if message.direction == Direction.incoming {

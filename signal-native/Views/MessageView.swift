@@ -17,9 +17,11 @@ struct MessageView: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(messages) {
-                    ChatBubbleView(message: $0)
-                        .padding(10)
+                VStack {
+                    ForEach(messages) {
+                        ChatBubbleView(message: $0)
+                            .padding(10)
+                    }
                 }
             }
             TextField(
@@ -29,7 +31,7 @@ struct MessageView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
         }
-        .background(Color(NSColor.controlBackgroundColor))
+        .background(Color(.controlBackgroundColor))
     }
 }
 

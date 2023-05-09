@@ -1,3 +1,4 @@
 - dzisiaj - wiadomosci
 - tryb komunikatora gdzie widzisz tylko jedna wiadomosc i ktos moze cos pisac jak potwierdzisz
 - raspberry
+- fix swiftui data model, @StateObject etc
