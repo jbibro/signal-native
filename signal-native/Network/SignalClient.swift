@@ -15,14 +15,14 @@ struct SignalClient {
     private let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
     var messages: PassthroughSubject<(who: String, what: Message), Never>
 
-    func connect() {
+    func connect() -> Channel {
         let bootstrap = ClientBootstrap(group: group)
             .channelOption(ChannelOptions.socketOption(.so_reuseaddr), value: 1)
             .channelInitializer { channel in
                 return channel.pipeline.addHandlers([ByteToMessageHandler(LineBasedFrameDecoder()), Handler(messages: messages)])
             }
         
-        try! bootstrap.connect(host: "::1", port: 7583).wait()
+        return try! bootstrap.connect(host: "::1", port: 7583).wait()
     }
     
     func disconnect() {
@@ -46,9 +46,13 @@ class Handler: ChannelInboundHandler {
         do {
             let signalMessage = try jsonDecoder.decode(SignalMessage.self, from: data!)
             if let sent = signalMessage.params.envelope.syncMessage {
-                messages.send((who: signalMessage.params.envelope.sourceName, what: Message(body: sent.sentMessage.message, direction: Direction.outgoing)))
+                if sent.sentMessage.groupInfo == nil {
+                    messages.send((who: sent.sentMessage.destination, what: Message(body: sent.sentMessage.message, direction: Direction.outgoing)))
+                }
             } else if let received = signalMessage.params.envelope.dataMessage {
-                messages.send((who: signalMessage.params.envelope.sourceName, what: Message(body: received.message, direction: Direction.incoming)))
+                if received.groupInfo == nil { // ignore groups for now
+                    messages.send((who: signalMessage.params.envelope.sourceNumber, what: Message(body: received.message, direction: Direction.incoming)))
+                }
             }
         } catch {
             
@@ -66,6 +70,7 @@ struct Params: Decodable {
 
 struct Envelope: Decodable {
     var sourceName: String
+    var sourceNumber: String
     var syncMessage: SyncMessage?
     var dataMessage: DataMessage?
 }
@@ -76,9 +81,16 @@ struct SyncMessage: Decodable {
 
 struct DataMessage: Decodable {
     var message: String
+    var groupInfo: GroupInfo?
 }
 
 struct SentMessage: Decodable {
     var message: String
     var destination: String
+    var groupInfo: GroupInfo?
+}
+
+struct GroupInfo: Decodable {
+    var groupId: String
+    var type: String
 }

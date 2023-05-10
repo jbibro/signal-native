@@ -10,20 +10,15 @@ import OrderedCollections
 import Combine
 
 class Contacts: ObservableObject {
-    @Published var contacts: OrderedDictionary<Contact, Message> = [:]
+    @Published var contacts: OrderedDictionary<String, Contact> = [
+        "+48693985499": Contact(name: "Miko", phoneNumber: "+48693985499"),
+        "+48669416529": Contact(name: "Aniusia😍", phoneNumber: "+48669416529"),
+        "+48504695051": Contact(name: "Mama", phoneNumber: "+48504695051")
+    ]
     
-    private let signal: Signal
-    var messageStream: AnyCancellable?
-
-    init(signal: Signal) {
-        self.signal = signal
-        messageStream = signal
-            .messages()
-            .receive(on: RunLoop.main)
-            .sink { m in self.updateLastMessage(contact: Contact(name: m.who), message: Message(body: m.what.body, direction: m.what.direction)) }
-    }
-    
-    func updateLastMessage(contact: Contact, message: Message) {
-        contacts[contact] = message
+    subscript(phoneNumber: String) -> Contact? {
+        get {
+            return contacts[phoneNumber]
+        }
     }
 }

@@ -15,7 +15,7 @@ struct signal_nativeApp: App {
     @StateObject private var messages: Messages
     init() {
         let signal = Signal()
-        _contacts = StateObject(wrappedValue: Contacts(signal: signal))
+        _contacts = StateObject(wrappedValue: Contacts())
         _messages = StateObject(wrappedValue: Messages(signal: signal))
     }
         

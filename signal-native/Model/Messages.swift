@@ -10,12 +10,8 @@ import OrderedCollections
 import Combine
 
 final class Messages: ObservableObject {
-    @Published var messages: OrderedDictionary<Contact, [Message]> = [
-        Contact(name: "Aniusia 😍"): [],
-        Contact(name: "Miko"): [],
-        Contact(name: "Kuba"): [],
-        Contact(name: "Jakub"): []
-    ]
+    @Published var messages: OrderedDictionary<Contact, [Message]> = [:]
+    private let contacts = Contacts()
     
     private var signal: Signal
     var messageStream: AnyCancellable?
@@ -28,7 +24,15 @@ final class Messages: ObservableObject {
     }
     
     func onMessage(msg: (who: String, what: Message)) {
-        let contact = Contact(name: msg.who)
-        messages[contact]?.append(msg.what)
+        let contact = contacts[msg.who]!
+        if messages.keys.contains(contact) {
+            messages[contact]!.append(msg.what)
+        } else {
+            messages[contact] = [msg.what]
+        }
+    }
+    
+    func send(msg: String, contact: Contact) {
+        signal.send(msg: msg, reciepent: contact.phoneNumber)
     }
 }
