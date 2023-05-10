@@ -11,16 +11,25 @@ import SwiftUI
 
 struct MessageView: View {
     let messages: [Message]
+    @State var sentMessages: [Message] = []
+    let contact: Contact
 
     @State private var message = ""
+    @EnvironmentObject var messageService: Messages
 
     var body: some View {
         VStack {
-            ScrollView {
-                VStack {
-                    ForEach(messages) {
-                        ChatBubbleView(message: $0)
-                            .padding(10)
+            ScrollViewReader { scrollView in
+                ScrollView {
+                    VStack {
+                        ForEach(messages) {
+                            ChatBubbleView(message: $0)
+                                .padding(10)
+                                .id($0.id)
+                        }
+                        .onChange(of: messages.count) { _ in
+                            scrollView.scrollTo(messages.last?.id, anchor: .top)
+                        }
                     }
                 }
             }
@@ -28,6 +37,10 @@ struct MessageView: View {
                 "Message",
                 text: $message
             )
+            .onSubmit {
+                messageService.send(msg: message, contact: contact)
+                message = ""
+            }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
         }
@@ -37,6 +50,6 @@ struct MessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageView(messages: [])
+        MessageView(messages: [], contact: Contact(name: "x", phoneNumber: "x"))
     }
 }

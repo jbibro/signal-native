@@ -15,13 +15,11 @@ struct ContactList: View {
     var body: some View {
         List {
             Section(header: Text("Direct Messages")) {
-                ForEach(contacts.contacts.keys) {
-                    ContactRow(contact: $0, messages: messages.messages[Contact(name: $0.name)] ?? [])
+                ForEach(contacts.contacts.values) {
+                    ContactRow(contact: $0, messages: messages.messages[$0] ?? [])
                 }
             }
             Section(header: Text("Groups")) {
-                ContactRow(contact: Contact(name: "Frania"), messages: [])
-                ContactRow(contact: Contact(name: "Gotowanie"), messages: [Message(body: "zdjecie obiadu", direction: Direction.incoming)])
             }
         }
         .navigationTitle("Contacts")

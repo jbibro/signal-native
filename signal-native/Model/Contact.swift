@@ -9,11 +9,11 @@ import Foundation
 
 struct Contact: Identifiable, Hashable {
     var name: String
+    var phoneNumber: String
     
     var id: String {
         get {
             name
         }
-    }
-    
+    }    
 }

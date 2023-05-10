@@ -14,23 +14,13 @@ struct ContactRow: View {
     
     var body: some View {
         NavigationLink {
-            MessageView(messages: messages)
+            MessageView(messages: messages, contact: contact)
         } label: {
             HStack {
                 PersonImageView()
-                NameLastMessageTimeView(message: messages.last, contact: contact)
+                NameView(contact: contact)
             }
         }
-    }
-}
-
-struct LastMessageView: View {
-    let message: Message
-    
-    var body: some View {
-        Text(message.body)
-            .font(.callout)
-            .fontWeight(.light)
     }
 }
 
@@ -43,28 +33,16 @@ struct PersonImageView: View {
     }
 }
 
-struct NameLastMessageTimeView: View {
-    let message: Message?
+struct NameView: View {
     let contact: Contact
     
     var body: some View {
-        VStack(alignment: .leading,spacing: 3) {
-            HStack {
-                Text(contact.name).font(.headline)
-                Spacer()
-                if let message = message {
-                    Text("15:30").font(.callout)
-                }
-            }
-            if let message = message {
-                LastMessageView(message: message)
-            }
-        }
+        Text(contact.name).font(.headline)
     }
 }
 
 struct ContactRow_Previews: PreviewProvider {
     static var previews: some View {
-        ContactRow(contact: Contact(name: "Miko"), messages: [])
+        ContactRow(contact: Contact(name: "Miko", phoneNumber: "111"), messages: [])
     }
 }
