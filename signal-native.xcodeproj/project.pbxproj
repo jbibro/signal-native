@@ -10,8 +10,8 @@
 		E347E6FE2A0393EB00AFE5EB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E347E6FD2A0393EB00AFE5EB /* OrderedCollections */; };
 		E347E7002A03B18600AFE5EB /* ideas in Resources */ = {isa = PBXBuildFile; fileRef = E347E6FF2A03B18600AFE5EB /* ideas */; };
 		E38653812A02A433008978DB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653802A02A433008978DB /* Contact.swift */; };
-		E38653832A02A72C008978DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653822A02A72C008978DB /* Message.swift */; };
-		E38653852A02AC81008978DB /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653842A02AC81008978DB /* Messages.swift */; };
+		E38653832A02A72C008978DB /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653822A02A72C008978DB /* ChatMessage.swift */; };
+		E38653852A02AC81008978DB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653842A02AC81008978DB /* MessageService.swift */; };
 		E38653872A02C291008978DB /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653862A02C291008978DB /* Signal.swift */; };
 		E389AB5F2A03EDFE008CD84B /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */; };
 		E389AB622A03FF8C008CD84B /* SignalClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E389AB612A03FF8C008CD84B /* SignalClient.swift */; };
@@ -19,26 +19,27 @@
 		E389AB672A04004F008CD84B /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB662A04004F008CD84B /* NIOFoundationCompat */; };
 		E389AB6A2A040B32008CD84B /* NIOExtras in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB692A040B32008CD84B /* NIOExtras */; };
 		E389AB6C2A041A04008CD84B /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = E389AB6B2A041A04008CD84B /* test.json */; };
-		E39FC5BF2A056502001EA259 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FC5BE2A056502001EA259 /* Contacts.swift */; };
+		E39FC5BF2A056502001EA259 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FC5BE2A056502001EA259 /* ContactService.swift */; };
 		E3F2C3A229F983100087B12B /* signal_nativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3A129F983100087B12B /* signal_nativeApp.swift */; };
 		E3F2C3A429F983100087B12B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3A329F983100087B12B /* ContentView.swift */; };
 		E3F2C3A629F983110087B12B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F2C3A529F983110087B12B /* Assets.xcassets */; };
 		E3F2C3A929F983110087B12B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F2C3A829F983110087B12B /* Preview Assets.xcassets */; };
 		E3F2C3B529F98B370087B12B /* ContactRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B429F98B370087B12B /* ContactRow.swift */; };
 		E3F2C3B729F98C540087B12B /* ContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B629F98C540087B12B /* ContactList.swift */; };
-		E3F2C3B929F9907E0087B12B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B829F9907E0087B12B /* MessageView.swift */; };
+		E3F2C3B929F9907E0087B12B /* ContactMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3B829F9907E0087B12B /* ContactMessageView.swift */; };
+		E3FCB11A2A13F14B00D438FB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FCB1192A13F14B00D438FB /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E347E6FF2A03B18600AFE5EB /* ideas */ = {isa = PBXFileReference; lastKnownFileType = text; path = ideas; sourceTree = "<group>"; };
 		E38653802A02A433008978DB /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		E38653822A02A72C008978DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		E38653842A02AC81008978DB /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		E38653822A02A72C008978DB /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		E38653842A02AC81008978DB /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		E38653862A02C291008978DB /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
 		E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		E389AB612A03FF8C008CD84B /* SignalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalClient.swift; sourceTree = "<group>"; };
 		E389AB6B2A041A04008CD84B /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
-		E39FC5BE2A056502001EA259 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
+		E39FC5BE2A056502001EA259 /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		E3F2C39E29F983100087B12B /* signal-native.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "signal-native.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F2C3A129F983100087B12B /* signal_nativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signal_nativeApp.swift; sourceTree = "<group>"; };
 		E3F2C3A329F983100087B12B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,7 +48,8 @@
 		E3F2C3AA29F983110087B12B /* signal_native.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = signal_native.entitlements; sourceTree = "<group>"; };
 		E3F2C3B429F98B370087B12B /* ContactRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRow.swift; sourceTree = "<group>"; };
 		E3F2C3B629F98C540087B12B /* ContactList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactList.swift; sourceTree = "<group>"; };
-		E3F2C3B829F9907E0087B12B /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		E3F2C3B829F9907E0087B12B /* ContactMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageView.swift; sourceTree = "<group>"; };
+		E3FCB1192A13F14B00D438FB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				E389AB612A03FF8C008CD84B /* SignalClient.swift */,
+				E3FCB1192A13F14B00D438FB /* Message.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -93,6 +96,7 @@
 		E3F2C3A029F983100087B12B /* signal-native */ = {
 			isa = PBXGroup;
 			children = (
+				E3FCB1182A13F09200D438FB /* Logic */,
 				E389AB602A03FF79008CD84B /* Network */,
 				E3F2C3BA29F99A000087B12B /* Model */,
 				E3F2C3B329F98AFD0087B12B /* Views */,
@@ -119,7 +123,7 @@
 			children = (
 				E3F2C3B429F98B370087B12B /* ContactRow.swift */,
 				E3F2C3B629F98C540087B12B /* ContactList.swift */,
-				E3F2C3B829F9907E0087B12B /* MessageView.swift */,
+				E3F2C3B829F9907E0087B12B /* ContactMessageView.swift */,
 				E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */,
 			);
 			path = Views;
@@ -129,12 +133,19 @@
 			isa = PBXGroup;
 			children = (
 				E38653802A02A433008978DB /* Contact.swift */,
-				E38653822A02A72C008978DB /* Message.swift */,
-				E38653842A02AC81008978DB /* Messages.swift */,
-				E38653862A02C291008978DB /* Signal.swift */,
-				E39FC5BE2A056502001EA259 /* Contacts.swift */,
+				E38653822A02A72C008978DB /* ChatMessage.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E3FCB1182A13F09200D438FB /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				E38653862A02C291008978DB /* Signal.swift */,
+				E38653842A02AC81008978DB /* MessageService.swift */,
+				E39FC5BE2A056502001EA259 /* ContactService.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,10 +239,11 @@
 				E389AB5F2A03EDFE008CD84B /* ChatBubbleView.swift in Sources */,
 				E38653872A02C291008978DB /* Signal.swift in Sources */,
 				E3F2C3B529F98B370087B12B /* ContactRow.swift in Sources */,
-				E39FC5BF2A056502001EA259 /* Contacts.swift in Sources */,
-				E38653852A02AC81008978DB /* Messages.swift in Sources */,
-				E3F2C3B929F9907E0087B12B /* MessageView.swift in Sources */,
-				E38653832A02A72C008978DB /* Message.swift in Sources */,
+				E39FC5BF2A056502001EA259 /* ContactService.swift in Sources */,
+				E3FCB11A2A13F14B00D438FB /* Message.swift in Sources */,
+				E38653852A02AC81008978DB /* MessageService.swift in Sources */,
+				E3F2C3B929F9907E0087B12B /* ContactMessageView.swift in Sources */,
+				E38653832A02A72C008978DB /* ChatMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

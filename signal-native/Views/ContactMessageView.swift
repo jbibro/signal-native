@@ -9,13 +9,12 @@ import SwiftUI
 
 
 
-struct MessageView: View {
-    let messages: [Message]
-    @State var sentMessages: [Message] = []
+struct ContactMessageView: View {
+    let messages: [ChatMessage]
     let contact: Contact
 
     @State private var message = ""
-    @EnvironmentObject var messageService: Messages
+    @EnvironmentObject var messageService: MessageService
 
     var body: some View {
         VStack {
@@ -24,13 +23,18 @@ struct MessageView: View {
                     VStack {
                         ForEach(messages) {
                             ChatBubbleView(message: $0)
-                                .padding(10)
+                                .padding(.horizontal, 5)
                                 .id($0.id)
                         }
-                        .onChange(of: messages.count) { _ in
+                        .onAppear() {
+                            messageService.notifyReadAll(contact: contact)
+                            scrollView.scrollTo(messages.last?.id, anchor: .top)
+                        }
+                        .onChange(of: messages.count) { it in
                             scrollView.scrollTo(messages.last?.id, anchor: .top)
                         }
                     }
+                    .padding(.top, 5)
                 }
             }
             TextField(
@@ -49,7 +53,9 @@ struct MessageView: View {
 }
 
 struct MessageView_Previews: PreviewProvider {
+    @State static var readMessages: Int = 0
+
     static var previews: some View {
-        MessageView(messages: [], contact: Contact(name: "x", phoneNumber: "x"))
+        ContactMessageView(messages: [], contact: Contact(name: "x", phoneNumber: "x"))
     }
 }

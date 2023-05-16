@@ -13,7 +13,7 @@ struct Contact: Identifiable, Hashable {
     
     var id: String {
         get {
-            name
+            phoneNumber
         }
     }    
 }

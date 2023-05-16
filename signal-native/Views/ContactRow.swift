@@ -6,30 +6,36 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContactRow: View {
-    
     let contact: Contact
-    let messages: [Message]
-    
+    let messages: [ChatMessage]
+    let unreadMessages: Bool
+        
     var body: some View {
         NavigationLink {
-            MessageView(messages: messages, contact: contact)
+            ContactMessageView(messages: messages, contact: contact)
         } label: {
             HStack {
-                PersonImageView()
+                PersonImageView(unreadMessages: unreadMessages)
                 NameView(contact: contact)
             }
         }
+        
     }
 }
 
 struct PersonImageView: View {
+    
+    let unreadMessages: Bool
+    
     var body: some View {
         Image(systemName: "person.crop.circle.fill")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 20, height: 20, alignment: .topLeading)
+            .foregroundStyle(unreadMessages ? .green : .primary)
     }
 }
 
@@ -43,6 +49,6 @@ struct NameView: View {
 
 struct ContactRow_Previews: PreviewProvider {
     static var previews: some View {
-        ContactRow(contact: Contact(name: "Miko", phoneNumber: "111"), messages: [])
+        ContactRow(contact: Contact(name: "Miko", phoneNumber: "111"), messages: [], unreadMessages: false)
     }
 }

@@ -11,12 +11,15 @@ import Combine
 @main
 struct signal_nativeApp: App {
     
-    @StateObject private var contacts: Contacts
-    @StateObject private var messages: Messages
+    @StateObject private var contacts: ContactService
+    @StateObject private var messages: MessageService
     init() {
         let signal = Signal()
-        _contacts = StateObject(wrappedValue: Contacts())
-        _messages = StateObject(wrappedValue: Messages(signal: signal))
+        let contactService = ContactService()
+        let messageService = MessageService(signal: signal, contactService: contactService)
+        
+        _contacts = StateObject(wrappedValue: contactService)
+        _messages = StateObject(wrappedValue: messageService)
     }
         
     var body: some Scene {

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ContactList: View {
     
-    @EnvironmentObject var contacts: Contacts
-    @EnvironmentObject var messages: Messages
-    
+    @EnvironmentObject var contactService: ContactService
+    @EnvironmentObject var messageService: MessageService
+
     var body: some View {
         List {
             Section(header: Text("Direct Messages")) {
-                ForEach(contacts.contacts.values) {
-                    ContactRow(contact: $0, messages: messages.messages[$0] ?? [])
+                ForEach(contactService.contacts()) {
+                    ContactRow(contact: $0, messages: messageService.chatMessages(contact: $0), unreadMessages: messageService.anyUnreadMessage(contact: $0))
                 }
             }
             Section(header: Text("Groups")) {

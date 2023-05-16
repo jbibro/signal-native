@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
-       
+            
     var body: some View {
         NavigationView {
             ContactList()
         }
         .navigationTitle("Signal Native")
+        .onAppear {
+            UNUserNotificationCenter.current().requestAuthorization(options: .badge)
+                             { (_, _) in }
+        }
     }
 }
 
