@@ -13,7 +13,7 @@ import Combine
 
 struct SignalClient {
     private let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    var messages: PassthroughSubject<(who: String, what: Message), Never>
+    var messages: PassthroughSubject<Message, Never>
 
     func connect() -> Channel {
         let bootstrap = ClientBootstrap(group: group)
@@ -33,9 +33,9 @@ struct SignalClient {
 class Handler: ChannelInboundHandler {
     typealias InboundIn = ByteBuffer
     private let jsonDecoder = JSONDecoder()
-    var messages: PassthroughSubject<(who: String, what: Message), Never>
+    var messages: PassthroughSubject<Message, Never>
 
-    init(messages: PassthroughSubject<(who: String, what: Message), Never>) {
+    init(messages: PassthroughSubject<Message, Never>) {
         self.messages = messages
     }
     
@@ -44,16 +44,11 @@ class Handler: ChannelInboundHandler {
         let data: Data? = String(buffer: buffer).data(using: .utf8)
         print(String(buffer: buffer))
         do {
-            let signalMessage = try jsonDecoder.decode(SignalMessage.self, from: data!)
-            if let sent = signalMessage.params.envelope.syncMessage {
-                if sent.sentMessage.groupInfo == nil {
-                    messages.send((who: sent.sentMessage.destination, what: Message(body: sent.sentMessage.message, direction: Direction.outgoing)))
-                }
-            } else if let received = signalMessage.params.envelope.dataMessage {
-                if received.groupInfo == nil { // ignore groups for now
-                    messages.send((who: signalMessage.params.envelope.sourceNumber, what: Message(body: received.message, direction: Direction.incoming)))
-                }
+            let message = try jsonDecoder.decode(SignalMessage.self, from: data!).toMessage()
+            if let msg = message {
+                messages.send(msg)
             }
+
         } catch {
             
         }
@@ -62,6 +57,19 @@ class Handler: ChannelInboundHandler {
 
 struct SignalMessage: Decodable {
     var params: Params
+    
+    func toMessage() -> Message? {
+        if let sent = params.envelope.syncMessage {
+            if sent.sentMessage.groupInfo == nil {
+                return Message.outgoingSentOnOtherDevice(Message.OutgoingMessageSentOnOtherDevice(destination: sent.sentMessage.destination, body: sent.sentMessage.message))
+            }
+        } else if let received = params.envelope.dataMessage {
+            if received.groupInfo == nil { // ignore groups for now
+                return Message.incoming(Message.IncomingMessage(from: params.envelope.sourceNumber, body: received.message))
+            }
+        }
+        return nil
+    }
 }
 
 struct Params: Decodable {

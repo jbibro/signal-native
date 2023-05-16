@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatBubbleView: View {
-    let message: Message
+    let message: ChatMessage
     
     var body: some View {
         HStack {
@@ -33,6 +33,6 @@ struct ChatBubbleView: View {
 
 struct ChatBubbleView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatBubbleView(message: Message(body: "a", direction: Direction.incoming))
+        ChatBubbleView(message: ChatMessage(body: "a", direction: Direction.incoming))
     }
 }
