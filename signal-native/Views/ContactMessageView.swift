@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct ContactMessageView: View {
-    let messages: [ChatMessage]
+    var messages: [ChatMessage] = []
     let contact: Contact
 
     @State private var message = ""
@@ -42,8 +42,10 @@ struct ContactMessageView: View {
                 text: $message
             )
             .onSubmit {
-                messageService.send(msg: message, contact: contact)
-                message = ""
+                Task {
+                    await messageService.send(msg: message, contact: contact)
+                    message = ""
+                }
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
