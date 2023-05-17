@@ -45,10 +45,15 @@ struct Signal {
         .eraseToAnyPublisher()
     }
     
-    func send(msg: String, reciepent: String) {
+    func send(msg: String, reciepent: String) async -> Bool {
         let s = "{\"jsonrpc\":\"2.0\",\"method\":\"send\",\"params\":{\"recipient\":[\"\(reciepent)\"],\"message\":\"\(msg)\"}}\n"
         let buffer = channel.allocator.buffer(string: s)
-        try! channel.writeAndFlush(buffer).wait() // todo doczytac
+        do {
+            try await channel.writeAndFlush(buffer).get()
+            return true
+        } catch {
+            return false
+        }
     }
 }
 

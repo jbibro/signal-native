@@ -9,7 +9,7 @@ import Foundation
 import OrderedCollections
 import Combine
 import UserNotifications
-
+    
 
 final class MessageService: ObservableObject {
     private let contactService: ContactService
@@ -37,31 +37,29 @@ final class MessageService: ObservableObject {
             guard let contact = contactService[incomingMessage.from] else {
                 return
             }
-            addToChatMessages(contact: contact, msg: ChatMessage(body: incomingMessage.body, direction: Direction.incoming))
+            chatMessages[contact]?.append(ChatMessage(body: incomingMessage.body, direction: Direction.incoming))
             notifyUnreadMessages(contact: contact) // but only if app is in background
         case .outgoingSentOnOtherDevice(let outgoing):
             guard let contact = contactService[outgoing.destination] else {
                 return
             }
-            addToChatMessages(contact: contact, msg: ChatMessage(body: outgoing.body, direction: Direction.outgoing))
+            chatMessages[contact]?.append(ChatMessage(body: outgoing.body, direction: Direction.outgoing))
         }
     }
     
-    func addToChatMessages(contact: Contact, msg: ChatMessage) {
-        chatMessages[contact]?.append(msg)
-    }
-    
     func chatMessages(contact: Contact) -> [ChatMessage] {
-        return chatMessages[contact] ?? []
+        chatMessages[contact] ?? []
     }
     
     func anyUnreadMessage(contact: Contact) -> Bool {
-        return unreadMessages[contact] ?? false
+        unreadMessages[contact] ?? false
     }
-        
-    func send(msg: String, contact: Contact) {
-        signal.send(msg: msg, reciepent: contact.phoneNumber)
-        addToChatMessages(contact: contact, msg: ChatMessage(body: msg, direction: Direction.outgoing))
+
+    func send(msg: String, contact: Contact) async {
+        let result = await signal.send(msg: msg, reciepent: contact.phoneNumber)
+        DispatchQueue.main.sync {
+            self.chatMessages[contact]?.append(ChatMessage(body: msg, direction: Direction.outgoing, delivered: result)) // todo update message when result comes
+        }
     }
     
     func notifyReadAll(contact: Contact) {
@@ -70,13 +68,13 @@ final class MessageService: ObservableObject {
         updateBadge()
     }
     
-    func notifyUnreadMessages(contact: Contact) {
+    private func notifyUnreadMessages(contact: Contact) {
         unreadMessages[contact] = true
         
         updateBadge()
     }
     
-    func updateBadge() {
+    private func updateBadge() {
         UNUserNotificationCenter.current().setBadgeCount(unreadMessages.filter { $0.value }.count)
     }
 }

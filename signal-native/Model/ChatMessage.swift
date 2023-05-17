@@ -7,14 +7,22 @@
 
 import Foundation
 
-struct ChatMessage: Identifiable { // todo opaque
+struct ChatMessage: Identifiable {
     let id = UUID()
     let body: String
     let direction: Direction
+    let delivered: Bool
     
     init(body: String, direction: Direction) {
         self.body = body
         self.direction = direction
+        self.delivered = true
+    }
+    
+    init(body: String, direction: Direction, delivered: Bool) {
+        self.body = body
+        self.direction = direction
+        self.delivered = delivered
     }
 }
 

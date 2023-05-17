@@ -16,6 +16,8 @@ struct ChatBubbleView: View {
                 Spacer()
             }
             
+
+            // todo design message when unable to send
             Text(message.body)
                 .foregroundColor(Color(message.direction == Direction.outgoing ? .white : .labelColor))
                 .multilineTextAlignment(.leading)
