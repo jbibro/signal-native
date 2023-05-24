@@ -9,22 +9,24 @@ import SwiftUI
 import UserNotifications
 
 struct ContactRow: View {
-    let contact: Contact
+    let contactId: String
+    let contactName: String
     let messages: [ChatMessage]
     let unreadMessages: Bool
         
     var body: some View {
         NavigationLink {
-            ContactMessageView(messages: messages, contact: contact)
+            ContactMessageView(messages: messages, contactId: contactId)
         } label: {
             HStack {
                 PersonImageView(unreadMessages: unreadMessages)
-                NameView(contact: contact)
+                NameView(contactName: contactName)
             }
         }
         
     }
 }
+
 
 struct PersonImageView: View {
     
@@ -40,15 +42,15 @@ struct PersonImageView: View {
 }
 
 struct NameView: View {
-    let contact: Contact
+    let contactName: String
     
     var body: some View {
-        Text(contact.name).font(.headline)
+        Text(contactName).font(.headline)
     }
 }
 
 struct ContactRow_Previews: PreviewProvider {
     static var previews: some View {
-        ContactRow(contact: Contact(name: "Miko", phoneNumber: "111"), messages: [], unreadMessages: false)
+        ContactRow(contactId: "1", contactName: "Miko", messages: [], unreadMessages: false)
     }
 }

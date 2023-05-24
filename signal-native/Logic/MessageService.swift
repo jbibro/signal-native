@@ -10,21 +10,18 @@ import OrderedCollections
 import Combine
 import UserNotifications
     
-
 final class MessageService: ObservableObject {
     private let contactService: ContactService
     private var signal: Signal
 
-    @Published var chatMessages: OrderedDictionary<Contact, [ChatMessage]>
-    @Published var unreadMessages: [Contact: Bool] = [:]
+    @Published var chatMessages: OrderedDictionary<String, [ChatMessage]> = [:]
+    @Published var unreadMessages: [String: Bool] = [:]
         
     var messageStream: AnyCancellable?
     
     init(signal: Signal, contactService: ContactService) {
         self.signal = signal
         self.contactService = contactService
-        self.chatMessages = contactService.contacts().reduce(into: OrderedDictionary<Contact, [ChatMessage]>()) { result, contact in result[contact] = [] }
-        
         
         messageStream = signal.messages()
             .receive(on: RunLoop.main)
@@ -33,48 +30,68 @@ final class MessageService: ObservableObject {
     
     func onMessage(msg: Message) {
         switch msg {
-        case .incoming(let incomingMessage):
-            guard let contact = contactService[incomingMessage.from] else {
+        case .incoming(let from, let body, let groupId):
+            guard let _ = contactService[from] else {
                 return
             }
-            chatMessages[contact]?.append(ChatMessage(body: incomingMessage.body, direction: Direction.incoming))
-            notifyUnreadMessages(contact: contact) // but only if app is in background
-        case .outgoingSentOnOtherDevice(let outgoing):
-            guard let contact = contactService[outgoing.destination] else {
-                return
+            
+            let chatMessage = ChatMessage(body: body, senderId: from, groupId: groupId)
+            if let groupId = groupId {
+                addMessage(contactId: groupId, message: chatMessage)
+                notifyUnreadMessages(contactId: groupId) 
+            } else {
+                addMessage(contactId: from, message: chatMessage)
+                notifyUnreadMessages(contactId: from)
             }
-            chatMessages[contact]?.append(ChatMessage(body: outgoing.body, direction: Direction.outgoing))
+        case .outgoingSentOnOtherDevice(let contactId, let body, let groupId):
+            let chatMessage = ChatMessage(body: body, recipientId: contactId, groupId: groupId)
+            if let groupId = groupId {
+                addMessage(contactId: groupId, message: chatMessage)
+            } else if let contactId = contactId {
+                addMessage(contactId: contactId, message: chatMessage)
+            }
+        case .groups(let groups):
+            groups.filter { ["Frania", "Gotowanie", "Test"].contains($0.name) }.forEach { contactService.contactNames[$0.id] = $0.name }
         }
     }
     
-    func chatMessages(contact: Contact) -> [ChatMessage] {
-        chatMessages[contact] ?? []
+    func chatMessages(contactId: String) -> [ChatMessage] {
+        chatMessages[contactId] ?? []
     }
     
-    func anyUnreadMessage(contact: Contact) -> Bool {
-        unreadMessages[contact] ?? false
+    func anyUnreadMessage(contactId: String) -> Bool {
+        unreadMessages[contactId] ?? false
     }
 
-    func send(msg: String, contact: Contact) async {
-        let result = await signal.send(msg: msg, reciepent: contact.phoneNumber)
-        DispatchQueue.main.sync {
-            self.chatMessages[contact]?.append(ChatMessage(body: msg, direction: Direction.outgoing, delivered: result)) // todo update message when result comes
+    func send(msg: String, contactId: String) {
+        Task {
+            await self.signal.send(msg: msg, reciepent: contactId)
         }
+        
+        addMessage(contactId: contactId, message: ChatMessage(body: msg, recipientId: contactId, groupId: nil)) // todo update message when result comes
     }
     
-    func notifyReadAll(contact: Contact) {
-        unreadMessages[contact] = false
+    func notifyReadAll(contactId: String) {
+        unreadMessages[contactId] = false
         
         updateBadge()
     }
     
-    private func notifyUnreadMessages(contact: Contact) {
-        unreadMessages[contact] = true
+    private func notifyUnreadMessages(contactId: String) {
+        unreadMessages[contactId] = true
         
         updateBadge()
     }
     
     private func updateBadge() {
         UNUserNotificationCenter.current().setBadgeCount(unreadMessages.filter { $0.value }.count)
+    }
+    
+    private func addMessage(contactId: String, message: ChatMessage) {
+        if let existingContact = chatMessages[contactId] {
+            chatMessages[contactId]!.append(message)
+        } else {
+            chatMessages[contactId] = [message]
+        }
     }
 }

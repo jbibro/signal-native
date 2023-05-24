@@ -15,6 +15,10 @@ struct signal_nativeApp: App {
     @StateObject private var messages: MessageService
     init() {
         let signal = Signal()
+        Task {
+            await signal.listGroups()
+        }
+        
         let contactService = ContactService()
         let messageService = MessageService(signal: signal, contactService: contactService)
         
@@ -28,5 +32,13 @@ struct signal_nativeApp: App {
                 .environmentObject(contacts)
                 .environmentObject(messages)
         }
+    }
+}
+
+
+extension String: Identifiable {
+    public typealias ID = Int
+    public var id: Int {
+        return hash
     }
 }

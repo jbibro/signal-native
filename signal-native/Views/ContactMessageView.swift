@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ContactMessageView: View {
     var messages: [ChatMessage] = []
-    let contact: Contact
+    let contactId: String
 
     @State private var message = ""
     @EnvironmentObject var messageService: MessageService
@@ -22,13 +22,19 @@ struct ContactMessageView: View {
                 ScrollView {
                     VStack {
                         ForEach(messages) {
-                            ChatBubbleView(message: $0)
-                                .padding(.horizontal, 5)
-                                .id($0.id)
+                            if let _ = $0.groupId{
+                                GroupChatBubbleView(message: $0)
+                                    .padding(.horizontal, 5)
+                                    .id($0.id)
+                            } else {
+                                ChatBubbleView(message: $0)
+                                    .padding(.horizontal, 5)
+                                    .id($0.id)
+                            }
                         }
                         .onAppear() {
-                            messageService.notifyReadAll(contact: contact)
-                            scrollView.scrollTo(messages.last?.id, anchor: .top)
+                            messageService.notifyReadAll(contactId: contactId)
+                            scrollView.scrollTo(messages.last?.id, anchor: .top) // extract
                         }
                         .onChange(of: messages.count) { it in
                             scrollView.scrollTo(messages.last?.id, anchor: .top)
@@ -42,10 +48,8 @@ struct ContactMessageView: View {
                 text: $message
             )
             .onSubmit {
-                Task {
-                    await messageService.send(msg: message, contact: contact)
-                    message = ""
-                }
+                messageService.send(msg: message, contactId: contactId)
+                message = ""
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
@@ -56,8 +60,8 @@ struct ContactMessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     @State static var readMessages: Int = 0
-
+    
     static var previews: some View {
-        ContactMessageView(messages: [], contact: Contact(name: "x", phoneNumber: "x"))
+        ContactMessageView(messages: [], contactId: "123")
     }
 }

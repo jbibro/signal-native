@@ -43,6 +43,7 @@ class Handler: ChannelInboundHandler {
         let buffer = self.unwrapInboundIn(data)
         let data: Data? = String(buffer: buffer).data(using: .utf8)
         print(String(buffer: buffer))
+
         do {
             let message = try jsonDecoder.decode(SignalMessage.self, from: data!).toMessage()
             if let msg = message {
@@ -50,24 +51,28 @@ class Handler: ChannelInboundHandler {
             }
 
         } catch {
-            
+            print("a")
         }
     }
 }
 
 struct SignalMessage: Decodable {
-    var params: Params
+    var params: Params?
+    var result: [GroupResponse]?
     
     func toMessage() -> Message? {
-        if let sent = params.envelope.syncMessage {
-            if sent.sentMessage.groupInfo == nil {
-                return Message.outgoingSentOnOtherDevice(Message.OutgoingMessageSentOnOtherDevice(destination: sent.sentMessage.destination, body: sent.sentMessage.message))
-            }
-        } else if let received = params.envelope.dataMessage {
-            if received.groupInfo == nil { // ignore groups for now
-                return Message.incoming(Message.IncomingMessage(from: params.envelope.sourceNumber, body: received.message))
+        if let params = params {
+            if let sent = params.envelope.syncMessage {
+                return Message.outgoingSentOnOtherDevice(contactId: sent.sentMessage.destination, body: sent.sentMessage.message, groupId: sent.sentMessage.groupInfo?.groupId)
+            } else if let received = params.envelope.dataMessage {
+                return Message.incoming(from: params.envelope.sourceNumber, body: received.message, groupId: received.groupInfo?.groupId)
             }
         }
+        
+        if let groups = result {
+            return Message.groups(groups: groups.map { Group(name: $0.name, id: $0.id) })
+        }
+        
         return nil
     }
 }
@@ -94,11 +99,16 @@ struct DataMessage: Decodable {
 
 struct SentMessage: Decodable {
     var message: String
-    var destination: String
+    var destination: String?
     var groupInfo: GroupInfo?
 }
 
 struct GroupInfo: Decodable {
     var groupId: String
     var type: String
+}
+
+struct GroupResponse: Decodable {
+    var id: String
+    var name: String
 }
