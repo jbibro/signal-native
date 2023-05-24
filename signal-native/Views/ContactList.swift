@@ -11,16 +11,21 @@ struct ContactList: View {
     
     @EnvironmentObject var contactService: ContactService
     @EnvironmentObject var messageService: MessageService
-
+    
     var body: some View {
+        
         List {
             Section(header: Text("Direct Messages")) {
-                ForEach(contactService.contacts()) {
-                    ContactRow(contact: $0, messages: messageService.chatMessages(contact: $0), unreadMessages: messageService.anyUnreadMessage(contact: $0))
+                
+                ForEach(contactService.contactNames.keys) { // todo fix
+                    ContactRow(contactId: $0, contactName: contactService.contactNames[$0]!, messages: messageService.chatMessages(contactId: $0), unreadMessages: messageService.anyUnreadMessage(contactId: $0))
                 }
             }
-            Section(header: Text("Groups")) {
-            }
+//            Section(header: Text("Groups")) {
+//                ForEach(contactService.groups()) {
+//                    ContactRow(contact: Contact(name: $0.name, phoneNumber: "asd"), messages: [], unreadMessages: false)
+//                }
+//            }
         }
         .navigationTitle("Contacts")
         .listStyle(SidebarListStyle())

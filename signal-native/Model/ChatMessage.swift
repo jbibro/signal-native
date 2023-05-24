@@ -11,18 +11,26 @@ struct ChatMessage: Identifiable {
     let id = UUID()
     let body: String
     let direction: Direction
-    let delivered: Bool
+    let senderId: String?
+    let recipientId: String?
+    let groupId: String?
     
-    init(body: String, direction: Direction) {
+    // I sent something (sync message)
+    init(body: String, recipientId: String?, groupId: String?) {
         self.body = body
-        self.direction = direction
-        self.delivered = true
+        self.direction = Direction.outgoing
+        self.senderId = nil
+        self.recipientId = recipientId
+        self.groupId = groupId
     }
     
-    init(body: String, direction: Direction, delivered: Bool) {
+    // I received something
+    init(body: String, senderId: String, groupId: String?) {
         self.body = body
-        self.direction = direction
-        self.delivered = delivered
+        self.direction = Direction.incoming
+        self.senderId = senderId
+        self.recipientId = nil
+        self.groupId = groupId
     }
 }
 

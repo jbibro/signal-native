@@ -46,7 +46,20 @@ struct Signal {
     }
     
     func send(msg: String, reciepent: String) async -> Bool {
-        let s = "{\"jsonrpc\":\"2.0\",\"method\":\"send\",\"params\":{\"recipient\":[\"\(reciepent)\"],\"message\":\"\(msg)\"}}\n"
+        let s = "{\"jsonrpc\":\"2.0\",\"method\":\"send\",\"params\":{\"recipient\":[\"\(reciepent)\"],\"message\":\"\(msg)\"}}\n" // todo move to signal network
+        let buffer = channel.allocator.buffer(string: s)
+        do {
+            try await channel.writeAndFlush(buffer).get()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    func listGroups() async -> Bool  {
+        let s = "{\"jsonrpc\":\"2.0\",\"method\":\"listGroups\", \"id\": \"listGroups\"}\n" // todo move to signal network
+        
+        // duplication
         let buffer = channel.allocator.buffer(string: s)
         do {
             try await channel.writeAndFlush(buffer).get()

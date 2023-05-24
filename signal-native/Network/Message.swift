@@ -8,19 +8,8 @@
 import Foundation
 
 enum Message {
-        
-    typealias PhoneNumber = String
-    
-    struct IncomingMessage {
-        let from: PhoneNumber
-        let body: String
-    }
-    
-    struct OutgoingMessageSentOnOtherDevice {
-        let destination: PhoneNumber
-        let body: String
-    }
-    
-    case incoming(IncomingMessage)
-    case outgoingSentOnOtherDevice(OutgoingMessageSentOnOtherDevice)
+            
+    case incoming(from: String, body: String, groupId: String? = nil)
+    case outgoingSentOnOtherDevice(contactId: String?, body: String, groupId: String? = nil)
+    case groups(groups: [Group])
 }
