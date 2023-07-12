@@ -11,14 +11,20 @@ struct ContactList: View {
     
     @EnvironmentObject var contactService: ContactService
     @EnvironmentObject var messageService: MessageService
-    
+            
     var body: some View {
         
-        List {
+        List() {
             Section(header: Text("Direct Messages")) {
                 
-                ForEach(contactService.contactNames.keys) { // todo fix
-                    ContactRow(contactId: $0, contactName: contactService.contactNames[$0]!, messages: messageService.chatMessages(contactId: $0), unreadMessages: messageService.anyUnreadMessage(contactId: $0))
+                ForEach(contactService.contactNames.keys) { contactId in
+                    ContactRow(
+                        contactId: contactId,
+                        contactName: contactService.contactNames[contactId]!,
+                        messages: messageService.chatMessages(contactId: contactId),
+                        unreadMessages: messageService.anyUnreadMessage(contactId: contactId)
+                    )
+                    .tag(contactId)
                 }
             }
 //            Section(header: Text("Groups")) {
@@ -34,6 +40,7 @@ struct ContactList: View {
 }
 
 struct ContactList_Previews: PreviewProvider {
+    
     static var previews: some View {
         ContactList()
     }

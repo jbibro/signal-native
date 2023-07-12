@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Group: Identifiable, Hashable, MessageDestination {
+struct Group: Identifiable, Hashable {
     let name: String
     var id: String
     

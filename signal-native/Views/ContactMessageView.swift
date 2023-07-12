@@ -8,13 +8,12 @@
 import SwiftUI
 
 
-
 struct ContactMessageView: View {
     var messages: [ChatMessage] = []
     let contactId: String
 
-    @State private var message = ""
     @EnvironmentObject var messageService: MessageService
+    @Environment(\.controlActiveState) var controlActiveState
 
     var body: some View {
         VStack {
@@ -33,26 +32,27 @@ struct ContactMessageView: View {
                             }
                         }
                         .onAppear() {
-                            messageService.notifyReadAll(contactId: contactId)
                             scrollView.scrollTo(messages.last?.id, anchor: .top) // extract
                         }
                         .onChange(of: messages.count) { it in
+                            if controlActiveState == .key {
+                                messageService.notifyReadAll(contactId: contactId)
+                            }
                             scrollView.scrollTo(messages.last?.id, anchor: .top)
+                        }
+                        .onChange(of: controlActiveState) { newState in
+                            if newState == .key {
+                                messageService.notifyReadAll(contactId: contactId)
+                            }
                         }
                     }
                     .padding(.top, 5)
                 }
+                .onAppear {
+                    messageService.notifyReadAll(contactId: contactId)
+                }
             }
-            TextField(
-                "Message",
-                text: $message
-            )
-            .onSubmit {
-                messageService.send(msg: message, contactId: contactId)
-                message = ""
-            }
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding()
+            ChattingView(contactId: contactId)
         }
         .background(Color(.controlBackgroundColor))
     }

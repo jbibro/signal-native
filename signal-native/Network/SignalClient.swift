@@ -63,14 +63,10 @@ struct SignalMessage: Decodable {
     func toMessage() -> Message? {
         if let params = params {
             if let sent = params.envelope.syncMessage {
-                return Message.outgoingSentOnOtherDevice(contactId: sent.sentMessage.destination, body: sent.sentMessage.message, groupId: sent.sentMessage.groupInfo?.groupId)
+                return Message.outgoingSentOnOtherDevice(recipientId: sent.sentMessage.destination, body: sent.sentMessage.message, groupId: sent.sentMessage.groupInfo?.groupId)
             } else if let received = params.envelope.dataMessage {
                 return Message.incoming(from: params.envelope.sourceNumber, body: received.message, groupId: received.groupInfo?.groupId)
             }
-        }
-        
-        if let groups = result {
-            return Message.groups(groups: groups.map { Group(name: $0.name, id: $0.id) })
         }
         
         return nil

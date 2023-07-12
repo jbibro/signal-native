@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E316DCF82A1FCE800016C211 /* PhotosSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E316DCF72A1FCE800016C211 /* PhotosSelector.swift */; };
+		E316DCFA2A1FCF450016C211 /* ChattingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E316DCF92A1FCF450016C211 /* ChattingView.swift */; };
 		E347E6FE2A0393EB00AFE5EB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E347E6FD2A0393EB00AFE5EB /* OrderedCollections */; };
 		E347E7002A03B18600AFE5EB /* ideas in Resources */ = {isa = PBXBuildFile; fileRef = E347E6FF2A03B18600AFE5EB /* ideas */; };
-		E34E09752A1D29D900D1F1F9 /* MessageDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34E09742A1D29D900D1F1F9 /* MessageDestination.swift */; };
 		E3794F0C2A15596C001BDC61 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3794F0B2A15596C001BDC61 /* Group.swift */; };
 		E38653812A02A433008978DB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653802A02A433008978DB /* Contact.swift */; };
 		E38653832A02A72C008978DB /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38653822A02A72C008978DB /* ChatMessage.swift */; };
@@ -20,8 +21,8 @@
 		E389AB652A04004F008CD84B /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB642A04004F008CD84B /* NIO */; };
 		E389AB672A04004F008CD84B /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB662A04004F008CD84B /* NIOFoundationCompat */; };
 		E389AB6A2A040B32008CD84B /* NIOExtras in Frameworks */ = {isa = PBXBuildFile; productRef = E389AB692A040B32008CD84B /* NIOExtras */; };
-		E389AB6C2A041A04008CD84B /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = E389AB6B2A041A04008CD84B /* test.json */; };
 		E39FC5BF2A056502001EA259 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FC5BE2A056502001EA259 /* ContactService.swift */; };
+		E3C15F072A36511800A2BB26 /* signal-cli in Resources */ = {isa = PBXBuildFile; fileRef = E3C15F062A36511800A2BB26 /* signal-cli */; };
 		E3F2C3A229F983100087B12B /* signal_nativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3A129F983100087B12B /* signal_nativeApp.swift */; };
 		E3F2C3A429F983100087B12B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2C3A329F983100087B12B /* ContentView.swift */; };
 		E3F2C3A629F983110087B12B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F2C3A529F983110087B12B /* Assets.xcassets */; };
@@ -33,8 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E316DCF72A1FCE800016C211 /* PhotosSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSelector.swift; sourceTree = "<group>"; };
+		E316DCF92A1FCF450016C211 /* ChattingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingView.swift; sourceTree = "<group>"; };
 		E347E6FF2A03B18600AFE5EB /* ideas */ = {isa = PBXFileReference; lastKnownFileType = text; path = ideas; sourceTree = "<group>"; };
-		E34E09742A1D29D900D1F1F9 /* MessageDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDestination.swift; sourceTree = "<group>"; };
 		E3794F0B2A15596C001BDC61 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		E38653802A02A433008978DB /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		E38653822A02A72C008978DB /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
@@ -42,8 +44,8 @@
 		E38653862A02C291008978DB /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
 		E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		E389AB612A03FF8C008CD84B /* SignalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalClient.swift; sourceTree = "<group>"; };
-		E389AB6B2A041A04008CD84B /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		E39FC5BE2A056502001EA259 /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
+		E3C15F062A36511800A2BB26 /* signal-cli */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = "signal-cli"; path = "../../signal-cli-source/build/native/nativeCompile/signal-cli"; sourceTree = "<group>"; };
 		E3F2C39E29F983100087B12B /* signal-native.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "signal-native.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F2C3A129F983100087B12B /* signal_nativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signal_nativeApp.swift; sourceTree = "<group>"; };
 		E3F2C3A329F983100087B12B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		E3F2C39529F983100087B12B = {
 			isa = PBXGroup;
 			children = (
-				E389AB6B2A041A04008CD84B /* test.json */,
+				E3C15F062A36511800A2BB26 /* signal-cli */,
 				E3F2C3A029F983100087B12B /* signal-native */,
 				E3F2C39F29F983100087B12B /* Products */,
 			);
@@ -129,6 +131,8 @@
 				E3F2C3B629F98C540087B12B /* ContactList.swift */,
 				E3F2C3B829F9907E0087B12B /* ContactMessageView.swift */,
 				E389AB5E2A03EDFE008CD84B /* ChatBubbleView.swift */,
+				E316DCF72A1FCE800016C211 /* PhotosSelector.swift */,
+				E316DCF92A1FCF450016C211 /* ChattingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -139,7 +143,6 @@
 				E38653802A02A433008978DB /* Contact.swift */,
 				E38653822A02A72C008978DB /* ChatMessage.swift */,
 				E3794F0B2A15596C001BDC61 /* Group.swift */,
-				E34E09742A1D29D900D1F1F9 /* MessageDestination.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,9 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E347E7002A03B18600AFE5EB /* ideas in Resources */,
-				E389AB6C2A041A04008CD84B /* test.json in Resources */,
 				E3F2C3A929F983110087B12B /* Preview Assets.xcassets in Resources */,
 				E3F2C3A629F983110087B12B /* Assets.xcassets in Resources */,
+				E3C15F072A36511800A2BB26 /* signal-cli in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,12 +244,13 @@
 				E389AB622A03FF8C008CD84B /* SignalClient.swift in Sources */,
 				E3F2C3B729F98C540087B12B /* ContactList.swift in Sources */,
 				E3F2C3A429F983100087B12B /* ContentView.swift in Sources */,
-				E34E09752A1D29D900D1F1F9 /* MessageDestination.swift in Sources */,
 				E3F2C3A229F983100087B12B /* signal_nativeApp.swift in Sources */,
 				E389AB5F2A03EDFE008CD84B /* ChatBubbleView.swift in Sources */,
 				E38653872A02C291008978DB /* Signal.swift in Sources */,
+				E316DCF82A1FCE800016C211 /* PhotosSelector.swift in Sources */,
 				E3794F0C2A15596C001BDC61 /* Group.swift in Sources */,
 				E3F2C3B529F98B370087B12B /* ContactRow.swift in Sources */,
+				E316DCFA2A1FCF450016C211 /* ChattingView.swift in Sources */,
 				E39FC5BF2A056502001EA259 /* ContactService.swift in Sources */,
 				E3FCB11A2A13F14B00D438FB /* Message.swift in Sources */,
 				E38653852A02AC81008978DB /* MessageService.swift in Sources */,

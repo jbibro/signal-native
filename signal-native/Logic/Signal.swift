@@ -20,25 +20,8 @@ struct Signal {
     func messages() -> AnyPublisher<Message, Never> {
         return Publishers.Sequence(sequence:
             [
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "co tam", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "KUBA!!!", direction: Direction.incoming)),
-//                ("+48669416529", ChatMessage(body: "a nic", direction: Direction.outgoing)),
-//                ("+48693985499", ChatMessage(body: "nudy", direction: Direction.outgoing)),
+//                ("+123123123", ChatMessage(body: "co tam", direction: Direction.incoming)),
+
             ]
         )
         .merge(with: realMessages)
@@ -46,21 +29,13 @@ struct Signal {
     }
     
     func send(msg: String, reciepent: String) async -> Bool {
-        let s = "{\"jsonrpc\":\"2.0\",\"method\":\"send\",\"params\":{\"recipient\":[\"\(reciepent)\"],\"message\":\"\(msg)\"}}\n" // todo move to signal network
-        let buffer = channel.allocator.buffer(string: s)
-        do {
-            try await channel.writeAndFlush(buffer).get()
-            return true
-        } catch {
-            return false
+        var command: String
+        if reciepent.starts(with: "+48") {
+            command = "{\"jsonrpc\":\"2.0\",\"method\":\"send\",\"params\":{\"recipient\":[\"\(reciepent)\"],\"message\":\"\(msg)\"}}\n" // todo move to signal network
+        } else {
+            command = "{\"jsonrpc\":\"2.0\",\"method\":\"send\",\"params\":{\"groupId\":[\"\(reciepent)\"],\"message\":\"\(msg)\"}}\n" // todo move to signal network
         }
-    }
-    
-    func listGroups() async -> Bool  {
-        let s = "{\"jsonrpc\":\"2.0\",\"method\":\"listGroups\", \"id\": \"listGroups\"}\n" // todo move to signal network
-        
-        // duplication
-        let buffer = channel.allocator.buffer(string: s)
+        let buffer = channel.allocator.buffer(string: command)
         do {
             try await channel.writeAndFlush(buffer).get()
             return true
