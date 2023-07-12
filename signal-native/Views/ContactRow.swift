@@ -51,6 +51,6 @@ struct NameView: View {
 
 struct ContactRow_Previews: PreviewProvider {
     static var previews: some View {
-        ContactRow(contactId: "1", contactName: "Miko", messages: [], unreadMessages: false)
+        ContactRow(contactId: "1", contactName: "Jan", messages: [], unreadMessages: false)
     }
 }

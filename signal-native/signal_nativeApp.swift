@@ -7,19 +7,18 @@
 
 import SwiftUI
 import Combine
+import Foundation
 
 @main
 struct signal_nativeApp: App {
     
     @StateObject private var contacts: ContactService
     @StateObject private var messages: MessageService
+    
     init() {
         let signal = Signal()
-        Task {
-            await signal.listGroups()
-        }
-        
         let contactService = ContactService()
+//        contactService.indexData()
         let messageService = MessageService(signal: signal, contactService: contactService)
         
         _contacts = StateObject(wrappedValue: contactService)

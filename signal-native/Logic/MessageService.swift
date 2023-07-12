@@ -9,14 +9,19 @@ import Foundation
 import OrderedCollections
 import Combine
 import UserNotifications
+
+import AppKit
     
 final class MessageService: ObservableObject {
+    
+    typealias ContactId = String
+    
     private let contactService: ContactService
     private var signal: Signal
 
-    @Published var chatMessages: OrderedDictionary<String, [ChatMessage]> = [:]
-    @Published var unreadMessages: [String: Bool] = [:]
-        
+    @Published var chatMessages: OrderedDictionary<ContactId, [ChatMessage]> = [:]
+    @Published var unreadMessages: [ContactId: Bool] = [:]
+            
     var messageStream: AnyCancellable?
     
     init(signal: Signal, contactService: ContactService) {
@@ -31,28 +36,21 @@ final class MessageService: ObservableObject {
     func onMessage(msg: Message) {
         switch msg {
         case .incoming(let from, let body, let groupId):
-            guard let _ = contactService[from] else {
+            guard let _ = contactService.contactNames[from] else {
                 return
             }
             
+            let contactId = groupId ?? from
             let chatMessage = ChatMessage(body: body, senderId: from, groupId: groupId)
-            if let groupId = groupId {
-                addMessage(contactId: groupId, message: chatMessage)
-                notifyUnreadMessages(contactId: groupId) 
-            } else {
-                addMessage(contactId: from, message: chatMessage)
-                notifyUnreadMessages(contactId: from)
-            }
-        case .outgoingSentOnOtherDevice(let contactId, let body, let groupId):
-            let chatMessage = ChatMessage(body: body, recipientId: contactId, groupId: groupId)
-            if let groupId = groupId {
-                addMessage(contactId: groupId, message: chatMessage)
-            } else if let contactId = contactId {
-                addMessage(contactId: contactId, message: chatMessage)
-            }
-        case .groups(let groups):
-            groups.filter { ["Frania", "Gotowanie", "Test"].contains($0.name) }.forEach { contactService.contactNames[$0.id] = $0.name }
+            
+            addMessage(contactId: contactId, message: chatMessage)
+            notifyUnreadMessages(contactId: contactId)
+        case .outgoingSentOnOtherDevice(let recipientId, let body, let groupId):
+            let chatMessage = ChatMessage(body: body, recipientId: recipientId, groupId: groupId)
+            let contactId = groupId ?? recipientId!
+            addMessage(contactId: contactId, message: chatMessage)
         }
+
     }
     
     func chatMessages(contactId: String) -> [ChatMessage] {
@@ -84,11 +82,16 @@ final class MessageService: ObservableObject {
     }
     
     private func updateBadge() {
-        UNUserNotificationCenter.current().setBadgeCount(unreadMessages.filter { $0.value }.count)
+        let unreadMessages = unreadMessages.filter { $0.value }.count
+        if unreadMessages > 0 {
+            NSApplication.shared.dockTile.badgeLabel = String(unreadMessages)
+        } else {
+            NSApplication.shared.dockTile.badgeLabel = nil
+        }
     }
     
     private func addMessage(contactId: String, message: ChatMessage) {
-        if let existingContact = chatMessages[contactId] {
+        if let _ = chatMessages[contactId] {
             chatMessages[contactId]!.append(message)
         } else {
             chatMessages[contactId] = [message]

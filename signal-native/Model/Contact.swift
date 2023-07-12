@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Contact: Identifiable, Hashable, MessageDestination {
+struct Contact: Identifiable, Hashable {
     var name: String
     var phoneNumber: String
     

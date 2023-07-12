@@ -10,6 +10,5 @@ import Foundation
 enum Message {
             
     case incoming(from: String, body: String, groupId: String? = nil)
-    case outgoingSentOnOtherDevice(contactId: String?, body: String, groupId: String? = nil)
-    case groups(groups: [Group])
+    case outgoingSentOnOtherDevice(recipientId: String?, body: String, groupId: String? = nil)
 }

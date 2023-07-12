@@ -24,6 +24,14 @@ struct ChatBubbleView: View {
                 .padding(.vertical, 8)
                 .background(Color(message.direction == Direction.outgoing ? .systemBlue : .windowBackgroundColor))
                 .cornerRadius(10)
+                .contextMenu {
+                    Button {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(message.body, forType: .string)
+                    } label: {
+                        Label("Copy", systemImage: "doc.on.doc.fill")
+                    }
+                }
             
             if message.direction == Direction.incoming {
                 Spacer()
@@ -37,7 +45,7 @@ struct GroupChatBubbleView: View {
     let message: ChatMessage
     
     @EnvironmentObject var contactService: ContactService
-    
+
     var body: some View {
         HStack {
             if message.direction == Direction.outgoing {
@@ -70,8 +78,20 @@ struct GroupChatBubbleView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
-                    .cornerRadius(10)
                     .background(Color(.systemBlue))
+                    .cornerRadius(10)
+                    .contextMenu {
+                        Button {
+                            // Add this item to a list of favorites.
+                        } label: {
+                            Label("Add to Favorites", systemImage: "heart")
+                        }
+                        Button {
+                            // Open Maps and center it on this item.
+                        } label: {
+                            Label("Show in Maps", systemImage: "mappin")
+                        }
+                    }
             }
         }
     }
@@ -79,12 +99,11 @@ struct GroupChatBubbleView: View {
 
 struct ChatBubbleView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupChatBubbleView(
+        ChatBubbleView(
             message: ChatMessage(
                 body: "aawddqwd",
-//                recipientId: nil,
-                senderId: "+48669416529",
-                groupId: "wP4hiwKJjIWFT7/CEICXIoFocgd8eYpSCYRvNlVkstI="
+                recipientId: nil,
+//                senderId: "+48123123123",
             )
         ).environmentObject(ContactService())
     }
